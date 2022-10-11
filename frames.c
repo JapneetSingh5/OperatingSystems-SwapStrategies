@@ -4,12 +4,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+// comments and definitions of strategies used are sourced from OSTEP #22
 struct pte {
     int vpn;
     int frame_number;
     int dirty;
     int valid;
     int wildcard;
+};
+
+struct accessed_page {
+    int address;
+    int read;
 };
 
 void print_state(int num_mem_access, int misses, int writes, int drops){
@@ -27,6 +33,50 @@ void print_verbose_state(int read, int written, int to_disk, int dropped_dirty, 
         printf("Error encountered, exiting....\n");
         exit(1);
     }
+}
+
+void execute_opt(char* trace_file_name, int num_frames, int is_verbose){
+    printf("Performing OPT.... \n");
+// The optimal replacement policy
+// leads to the fewest number of misses overall. 
+// Belady showed that a simple (but, unfortunately, difficult to implement!) 
+// approach that *replaces the page that will be 
+// accessed furthest in the future is the optimal policy*,
+// resulting in the fewest-possible cache misses.
+}
+
+void execute_fifo(char* trace_file_name, int num_frames, int is_verbose){
+    printf("Performing FIFO.... \n");
+// FIFO (first-in, first-out) replacement, where pages
+// were simply placed in a queue when they enter the system; when a replacement occurs, the page on the tail of the queue (the “first-in” page) is
+// evicted. FIFO has one great strength: it is quite simple to implement.
+}
+
+void execute_clock(char* trace_file_name, int num_frames, int is_verbose){
+    printf("Performing CLOCK.... \n");
+//     How does the OS employ the use bit to approximate LRU? Well, there
+// could be a lot of ways, but with the clock algorithm [C69], one simple
+// approach was suggested. Imagine all the pages of the system arranged in
+// a circular list. A clock hand points to some particular page to begin with
+// (it doesn’t really matter which). When a replacement must occur, the OS
+// checks if the currently-pointed to page P has a use bit of 1 or 0. If 1, this
+// implies that page P was recently used and thus is not a good candidate
+// for replacement. Thus, the use bit for P is set to 0 (cleared), and the clock
+// hand is incremented to the next page (P + 1). The algorithm continues
+// until it finds a use bit that is set to 0, implying this page has not been
+// recently used (or, in the worst case, that all pages have been and that we
+// have now searched through the entire set of pages, clearing all the bits).
+}
+
+void execute_lru(char* trace_file_name, int num_frames, int is_verbose){
+    printf("Performing LRU.... \n");
+//  Similarly, the Least-RecentlyUsed (LRU) policy replaces the least-recently-used page.
+}
+
+void execute_random(char* trace_file_name, int num_frames, int is_verbose){
+    printf("Performing RANDOM.... \n");
+//     simply picks a
+// random page to replace under memory pressure
 }
 
 int main(int argc, char** argv)
@@ -61,16 +111,19 @@ int main(int argc, char** argv)
         printf("File not found, exiting.. \n");
         exit(1);
     }
+    struct pte pages[num_frames];
+    // pages[99].frame_number = 10;
+    printf("%d %d", pages[99].vpn, pages[99].frame_number);
     if(strcmp(strategy,OPT)==0){
-        printf("Performing OPT.... \n");
+        execute_opt(trace_file_name, num_frames, is_verbose);
     }else if(strcmp(strategy, FIFO)==0){
-        printf("Performing FIFO.... \n");
+        execute_fifo(trace_file_name, num_frames, is_verbose);
     }else if(strcmp(strategy, CLOCK)==0){
-        printf("Performing CLOCK.... \n");
+        execute_clock(trace_file_name, num_frames, is_verbose);
     }else if(strcmp(strategy, LRU)==0){
-        printf("Performing LRU.... \n");
+        execute_lru(trace_file_name, num_frames, is_verbose);
     }else if(strcmp(strategy, RANDOM)==0){
-        printf("Performing RANDOM.... \n");
+        execute_random(trace_file_name, num_frames, is_verbose);
     }else{
         printf("Unknown strategy entered, exiting .... \n");
         exit(1);
