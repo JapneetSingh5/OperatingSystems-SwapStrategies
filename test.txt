@@ -1,0 +1,24 @@
+You have entered 4 arguments 
+./a.out 
+example_trace.in 
+100 
+CLOCK 
+example_trace.in
+Number of frames: 100 
+CLOCK 
+Is verbose 0 
+Missed page 262154 in memory at access 1 
+page number 262154 is at frame no. 0 
+Missed page 262152 in memory at access 2313 
+page number 262152 is at frame no. 1 
+Missed page 262161 in memory at access 2318 
+page number 262161 is at frame no. 2 
+Missed page 262153 in memory at access 2395 
+page number 262153 is at frame no. 3 
+Missed page 262151 in memory at access 7044 
+page number 262151 is at frame no. 4 
+Number of memory accesses:9502
+Number of misses:5
+Number of writes:0
+Number of drops:0
+Evictions 0 
