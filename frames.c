@@ -6,7 +6,7 @@
 #include <assert.h>
 
 // comments and definitions of strategies used are sourced from OSTEP #22
-
+int debug = 0;
 // 32 bit address space used
 int addr_size = 32;
 // offset stored using 12 bits in the address
@@ -15,6 +15,8 @@ int page_frame_size = 12;
 int page_num_size = 20;
 // for clock strategy
 int clock_pointer = 0;
+
+struct pte *frames;
 
 struct pte {
     int vpn;
@@ -36,14 +38,14 @@ struct accessed_page {
 };
 
 void print_state(int num_mem_access, int misses, int writes, int drops){
-    printf("Number of memory accesses:%d\nNumber of misses:%d\nNumber of writes:%d\nNumber of drops:%d\n", num_mem_access, misses, writes, drops);
+    printf("Number of memory accesses:%d\nNumber of misses:%d\nNumber of writes:%d\nNumber of drops:%d\n",num_mem_access,misses,writes,drops);
 }
 
 void print_verbose_state(int read, int written, int was_dirty){
     if(was_dirty==1){
-        printf("Page 0x%05x was read from disk, page 0x%05x was written to the disk.",read,written);
+        printf("Page 0x%05x was read from disk, page 0x%05x was written to the disk. \n",read,written);
     }else if(was_dirty==0){
-        printf("Page 0x%05x was read from disk, page 0x%05x was dropped (it was not dirty).",read,written);
+        printf("Page 0x%05x was read from disk, page 0x%05x was dropped (it was not dirty). \n",read,written);
     }else{
         printf("Error: inaccessible code reached, exiting.. \n");
         exit(1);
@@ -51,7 +53,7 @@ void print_verbose_state(int read, int written, int was_dirty){
 }
 
 int execute_opt(char* trace_file_name, int num_frames, int is_verbose){
-    printf("Performing OPT.... \n");
+    if(debug==1) printf("Performing OPT.... \n");
 // The optimal replacement policy
 // leads to the fewest number of misses overall. 
 // Belady showed that a simple (but, unfortunately, difficult to implement!) 
@@ -62,7 +64,7 @@ return -1;
 }
 
 int execute_fifo(struct pte frames[], int num_frames){
-    printf("Performing FIFO.... \n");
+    if(debug==1) printf("Performing FIFO.... \n");
     // FIFO (first-in, first-out) replacement, where pages
     // were simply placed in a queue when they enter the system; when a replacement occurs, the page on the tail of the queue (the “first-in” page) is
     // evicted. FIFO has one great strength: it is quite simple to implement.
@@ -82,18 +84,24 @@ int execute_fifo(struct pte frames[], int num_frames){
 // where to begin?
 // how to update begin after evict inde return?
 // piazza doubt?
-int execute_clock(struct pte* frames, int num_frames, int last_evicted_index){
-    printf("Performing CLOCK.... \n");
+int execute_clock(int num_frames, int last_evicted_index){
+    if(debug==1) printf("Performing CLOCK.... \n");
     int start_pointer = clock_pointer;
+    int evict_idx_temp = -1;
     do {
         if(frames[clock_pointer].use == 1) {
             frames[clock_pointer].use = 0;
             clock_pointer = (clock_pointer + 1) % num_frames;
             continue;
         }
-        return clock_pointer;
-    } while ( start_pointer != clock_pointer);
-    return (last_evicted_index+1)%num_frames;
+        evict_idx_temp = clock_pointer;
+        clock_pointer = (clock_pointer + 1) % num_frames;
+        return evict_idx_temp % num_frames;
+    } while (start_pointer != clock_pointer);
+
+    evict_idx_temp = clock_pointer;
+    clock_pointer = (clock_pointer + 1) % num_frames;
+    return (evict_idx_temp)%num_frames;
 // How does the OS employ the use bit to approximate LRU? Well, there
 // could be a lot of ways, but with the clock algorithm, one simple
 // approach was suggested. Imagine all the pages of the system arranged in
@@ -108,7 +116,7 @@ int execute_clock(struct pte* frames, int num_frames, int last_evicted_index){
 // have now searched through the entire set of pages, clearing all the bits).
 }
 
-int execute_lru(struct pte frames[], int num_frames){
+int execute_lru(int num_frames){
     //  printf("Performing LRU.... \n");
     //  Similarly, the Least-Recently Used (LRU) policy replaces the least-recently-used page.
     int evict_idx = 0;
@@ -167,13 +175,13 @@ int main(int argc, char** argv)
         printf("File not found, exiting.. \n");
         exit(1);
     }
-    struct pte frames[num_frames];
+    frames = (struct pte*)malloc(num_frames * sizeof(struct pte));
     for(int i=0; i<num_frames; i++){
         frames[i].vpn = -1;
         frames[i].frame_number = i;
         frames[i].dirty = 0;
         frames[i].valid = 0;
-        frames[i].use = 0;
+        frames[i].use = -1;
         frames[i].first_read = -1;
         frames[i].last_read = -1;
         frames[i].first_write = -1;
@@ -224,7 +232,7 @@ int main(int argc, char** argv)
                 }
             }
             if(page_found_in_mem == 0){
-                printf("READ - Missed page %d in memory at access %d \n", page_num_acc, mem_accesses);
+                if(debug==1) printf("READ - Missed page %d in memory at access %d \n", page_num_acc, mem_accesses);
                 misses++;
                 if(empty_frame_idx == -1){
                     evictions++;
@@ -236,9 +244,9 @@ int main(int argc, char** argv)
                     }else if(strcmp(strategy, FIFO)==0){
                         evict_idx = execute_fifo(frames, num_frames);
                     }else if(strcmp(strategy, CLOCK)==0){
-                        evict_idx = execute_clock(&frames[0], num_frames, last_evicted_index);
+                        evict_idx = execute_clock(num_frames, last_evicted_index);
                     }else if(strcmp(strategy, LRU)==0){
-                        evict_idx = execute_lru(frames, num_frames);
+                        evict_idx = execute_lru(num_frames);
                     }else if(strcmp(strategy, RANDOM)==0){
                         evict_idx = execute_random(num_frames);
                     }else{
@@ -247,9 +255,9 @@ int main(int argc, char** argv)
                     }
                     assert(evict_idx!=-1);
                     last_evicted_index = evict_idx;
-                    printf("Evicting %d, is  dirty %d \n",frames[evict_idx].vpn,frames[evict_idx].dirty);
+                    if(debug==1) printf("Evicting %d, is  dirty %d \n",frames[evict_idx].vpn,frames[evict_idx].dirty);
                     if(frames[evict_idx].dirty==1){
-                        printf("dirty drop page %d\n", frames[evict_idx].vpn);
+                        if(debug==1) printf("dirty drop page %d\n", frames[evict_idx].vpn);
                         writes_to_disk++;
                         // evicting dirty page, print state accordingly
                         // evicting frames[evict_idx].vpn, bringing in page_num_acc
@@ -257,7 +265,7 @@ int main(int argc, char** argv)
                             print_verbose_state(page_num_acc, frames[evict_idx].vpn, 1);
                         }
                     }else{
-                        printf("Non dirty drop page %d\n", frames[evict_idx].vpn);
+                        if(debug==1) printf("Non dirty drop page %d\n", frames[evict_idx].vpn);
                         drops_non_dirty++;
                         // evicted page was not dirty
                         // evicting frames[evict_idx].vpn, bringing in page_num_acc
@@ -266,7 +274,7 @@ int main(int argc, char** argv)
                         }
                     }
                     // simulating bringing the page in from memory ...
-                    printf("page number %d is at frame no. %d \n", page_num_acc, evict_idx);
+                    if(debug==1) printf("page number %d is at frame no. %d \n", page_num_acc, evict_idx);
                     frames[evict_idx].vpn = page_num_acc;
                     frames[evict_idx].brought_in_at = mem_accesses - 1;
                     frames[evict_idx].use = 1;
@@ -282,7 +290,7 @@ int main(int argc, char** argv)
                     // simulating bringing the page in from memory ...
                     // set page num to empty idx page frame
                     assert(empty_frame_idx != -1 && "empty frame index can't be -1");
-                    printf("page number %d is at frame no. %d \n", page_num_acc, empty_frame_idx);
+                    if(debug==1) printf("page number %d is at frame no. %d \n", page_num_acc, empty_frame_idx);
                     frames[empty_frame_idx].vpn = page_num_acc;
                     frames[empty_frame_idx].frame_number = empty_frame_idx;
                     frames[empty_frame_idx].brought_in_at = mem_accesses - 1;
@@ -305,7 +313,7 @@ int main(int argc, char** argv)
                     // Page found in memory, make it dirty
                     page_found_in_mem = 1;
                     assert(frames[i].valid == 1 && "page in mem, valid bit should be 1");
-                    printf("Writing %d, now DIRTY \n", frames[i].vpn);
+                    if(debug==1) printf("Writing %d, now DIRTY \n", frames[i].vpn);
                     frames[i].dirty = 1;
                     if(frames[i].first_write == -1){
                         frames[i].first_write = mem_accesses - 1;
@@ -321,7 +329,7 @@ int main(int argc, char** argv)
             }
             // page not found in memory
             if(page_found_in_mem == 0){
-                printf("WRITE - Missed page %d in memory at access %d \n", page_num_acc, mem_accesses);
+                if(debug==1) printf("WRITE - Missed page %d in memory at access %d \n", page_num_acc, mem_accesses);
                 misses++;
                 // if all frames are full
                 if(empty_frame_idx == -1){
@@ -334,9 +342,9 @@ int main(int argc, char** argv)
                     }else if(strcmp(strategy, FIFO)==0){
                         evict_idx = execute_fifo(frames, num_frames);
                     }else if(strcmp(strategy, CLOCK)==0){
-                        evict_idx = execute_clock(&frames[0], num_frames, last_evicted_index);
+                        evict_idx = execute_clock(num_frames, last_evicted_index);
                     }else if(strcmp(strategy, LRU)==0){
-                        evict_idx = execute_lru(frames, num_frames);
+                        evict_idx = execute_lru(num_frames);
                     }else if(strcmp(strategy, RANDOM)==0){
                         evict_idx = execute_random(num_frames);
                     }else{
@@ -344,10 +352,10 @@ int main(int argc, char** argv)
                         exit(1);
                     }
                     last_evicted_index = evict_idx;
-                    printf("Evicting %d, is  dirty %d \n",frames[evict_idx].vpn,frames[evict_idx].dirty);
+                    if(debug==1) printf("Evicting %d, is  dirty %d \n",frames[evict_idx].vpn,frames[evict_idx].dirty);
                     if(frames[evict_idx].dirty==1){
                         writes_to_disk++;
-                        printf("dirty drop page %d\n", frames[evict_idx].vpn);
+                        if(debug==1) printf("dirty drop page %d\n", frames[evict_idx].vpn);
                         // evicting dirty page, print state accordingly
                         // evicting frames[evict_idx].vpn, bringing in page_num_acc
                         if(is_verbose==1){
@@ -355,7 +363,7 @@ int main(int argc, char** argv)
                         }
                     }else{
                         drops_non_dirty++;
-                        printf("Non dirty drop page %d\n", frames[evict_idx].vpn);
+                        if(debug==1) printf("Non dirty drop page %d\n", frames[evict_idx].vpn);
                         // evicted page was not dirty
                         // evicting frames[evict_idx].vpn, bringing in page_num_acc
                         if(is_verbose==1){
@@ -363,7 +371,7 @@ int main(int argc, char** argv)
                         }
                     }
                     // simulating bringing the page in from memory ...
-                    printf("page number %d is at frame no. %d \n", page_num_acc, evict_idx);
+                    if(debug==1) printf("page number %d is at frame no. %d \n", page_num_acc, evict_idx);
                     frames[evict_idx].vpn = page_num_acc;
                     frames[evict_idx].frame_number = evict_idx;
                     frames[evict_idx].brought_in_at = mem_accesses - 1;
@@ -379,7 +387,7 @@ int main(int argc, char** argv)
                     // simulating bringing the page in from memory ...
                     // set page num to empty idx page frame
                     assert(empty_frame_idx != -1 && "empty frame index can't be -1");
-                    printf("page number %d is at frame no. %d \n", page_num_acc, empty_frame_idx);
+                    if(debug==1) printf("page number %d is at frame no. %d \n", page_num_acc, empty_frame_idx);
                     frames[empty_frame_idx].vpn = page_num_acc;
                     frames[empty_frame_idx].frame_number = empty_frame_idx;
                     frames[empty_frame_idx].brought_in_at = mem_accesses - 1;
