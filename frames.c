@@ -6,7 +6,7 @@
 #include <assert.h>
 
 // comments and definitions of strategies used are sourced from OSTEP #22
-int debug = 0;
+int debug = 1;
 // 32 bit address space used
 int addr_size = 32;
 // offset stored using 12 bits in the address
@@ -14,7 +14,6 @@ int page_frame_size = 12;
 // virtual page number hence, will be stored in the remaining 20 bits
 int page_num_size = 20;
 // for clock strategy
-int clock_pointer = 0;
 
 struct pte *frames;
 
@@ -63,7 +62,7 @@ int execute_opt(char* trace_file_name, int num_frames, int is_verbose){
 return -1;
 }
 
-int execute_fifo(struct pte frames[], int num_frames){
+int execute_fifo(int num_frames){
     if(debug==1) printf("Performing FIFO.... \n");
     // FIFO (first-in, first-out) replacement, where pages
     // were simply placed in a queue when they enter the system; when a replacement occurs, the page on the tail of the queue (the “first-in” page) is
@@ -84,7 +83,8 @@ int execute_fifo(struct pte frames[], int num_frames){
 // where to begin?
 // how to update begin after evict inde return?
 // piazza doubt?
-int execute_clock(int num_frames, int last_evicted_index){
+int clock_pointer = 0;
+int execute_clock(int num_frames){
     if(debug==1) printf("Performing CLOCK.... \n");
     int start_pointer = clock_pointer;
     int evict_idx_temp = -1;
@@ -226,6 +226,7 @@ int main(int argc, char** argv)
                         frames[i].last_read = mem_accesses - 1;
                     }
                     frames[i].last_used = mem_accesses - 1;
+                    frames[i].use = 1;
                     break;
                 }else if(frames[i].vpn==-1 && empty_frame_idx == -1){
                     empty_frame_idx = i;
@@ -242,9 +243,9 @@ int main(int argc, char** argv)
                     if(strcmp(strategy,OPT)==0){
                         evict_idx = execute_opt(trace_file_name, num_frames, is_verbose);
                     }else if(strcmp(strategy, FIFO)==0){
-                        evict_idx = execute_fifo(frames, num_frames);
+                        evict_idx = execute_fifo(num_frames);
                     }else if(strcmp(strategy, CLOCK)==0){
-                        evict_idx = execute_clock(num_frames, last_evicted_index);
+                        evict_idx = execute_clock(num_frames);
                     }else if(strcmp(strategy, LRU)==0){
                         evict_idx = execute_lru(num_frames);
                     }else if(strcmp(strategy, RANDOM)==0){
@@ -322,6 +323,7 @@ int main(int argc, char** argv)
                         frames[i].last_write = mem_accesses - 1;
                     }
                     frames[i].last_used = mem_accesses - 1;
+                    frames[i].use = 1;
                     break;
                 }else if(frames[i].vpn==-1 && empty_frame_idx == -1){
                     empty_frame_idx = i;
@@ -340,9 +342,9 @@ int main(int argc, char** argv)
                     if(strcmp(strategy,OPT)==0){
                         evict_idx = execute_opt(trace_file_name, num_frames, is_verbose);
                     }else if(strcmp(strategy, FIFO)==0){
-                        evict_idx = execute_fifo(frames, num_frames);
+                        evict_idx = execute_fifo(num_frames);
                     }else if(strcmp(strategy, CLOCK)==0){
-                        evict_idx = execute_clock(num_frames, last_evicted_index);
+                        evict_idx = execute_clock(num_frames);
                     }else if(strcmp(strategy, LRU)==0){
                         evict_idx = execute_lru(num_frames);
                     }else if(strcmp(strategy, RANDOM)==0){
