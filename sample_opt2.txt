@@ -1,0 +1,258 @@
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40007 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40011 was read from disk, page 0x40007 was written to the disk. 
+Page 0x40007 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40007 was written to the disk. 
+Page 0x40007 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40007 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Page 0x40011 was read from disk, page 0x4000a was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x40011 was read from disk, page 0x40009 was written to the disk. 
+Page 0x40009 was read from disk, page 0x40011 was dropped (it was not dirty). 
+Page 0x4000a was read from disk, page 0x40009 was written to the disk. 
+Number of memory accesses:9502
+Number of misses:256
+Number of writes:139
+Number of drops:115

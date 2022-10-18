@@ -6,16 +6,18 @@
 #include <assert.h>
 
 // comments and definitions of strategies used are sourced from OSTEP #22
-int debug = 1;
+int debug = 0;
 // 32 bit address space used
 int addr_size = 32;
 // offset stored using 12 bits in the address
 int page_frame_size = 12;
 // virtual page number hence, will be stored in the remaining 20 bits
 int page_num_size = 20;
-// for clock strategy
+// global clockpointer needed to maintain clock pointer's location for clock eviction strategy
+int clock_pointer = 0;
 
 struct pte *frames;
+struct parsed_line *parsed_lines;
 
 struct pte {
     int vpn;
@@ -29,6 +31,11 @@ struct pte {
     int last_write;
     int brought_in_at;
     int last_used;
+};
+
+struct parsed_line {
+    int vpn;
+    // int read; // 1 for read, 0 for write
 };
 
 struct accessed_page {
@@ -51,15 +58,39 @@ void print_verbose_state(int read, int written, int was_dirty){
     }
 }
 
-int execute_opt(char* trace_file_name, int num_frames, int is_verbose){
+int execute_opt(char* trace_file_name, int num_frames, int start_access, int total_accesses){
     if(debug==1) printf("Performing OPT.... \n");
+    int evict_idx = -1;
+    int overall_last_access = -1;
+    for(int i=0; i<num_frames; i++){
+        int curr_vpn = frames[i].vpn;
+        int access_time = -1;
+        int access_count = 0;
+        for(int j=start_access; j<total_accesses; j++){
+            access_count++;
+            if(parsed_lines[j].vpn == curr_vpn){
+                access_time = access_count;
+                if(access_time > overall_last_access){
+                    overall_last_access = access_time;
+                    evict_idx = i;
+                }
+                break;
+            }
+        }
+        // this page has not been accessed in the future at all
+        // in such cases, evict smallest frame no
+        // as we are iterating frames in ascending order, evict this frame itself
+        if(access_time==-1){
+            return i;
+        }
+    }
+    return evict_idx;
 // The optimal replacement policy
 // leads to the fewest number of misses overall. 
 // Belady showed that a simple (but, unfortunately, difficult to implement!) 
 // approach that replaces the page that will be 
 // accessed furthest in the future is the optimal policy,
 // resulting in the fewest-possible cache misses.
-return -1;
 }
 
 int execute_fifo(int num_frames){
@@ -83,7 +114,6 @@ int execute_fifo(int num_frames){
 // where to begin?
 // how to update begin after evict inde return?
 // piazza doubt?
-int clock_pointer = 0;
 int execute_clock(int num_frames){
     if(debug==1) printf("Performing CLOCK.... \n");
     int start_pointer = clock_pointer;
@@ -170,6 +200,35 @@ int main(int argc, char** argv)
         }
     }
     // printf("Is verbose %d \n", is_verbose);
+    int line_counter = 0;
+    int counter_loop_exit = 0;
+    FILE* file_ptr_counter = fopen(trace_file_name, "r");
+    // read line and update these 2 parameters at each iteration
+    char read_or_write;
+    unsigned virt_mem_addr;
+    while(counter_loop_exit == 0){
+        if(EOF == fscanf(file_ptr_counter, "%x %c", &virt_mem_addr, &read_or_write)){
+            counter_loop_exit=1;
+        }else{
+           line_counter++;
+        }
+    }
+    fclose(file_ptr_counter);
+    int total_accesses = line_counter;
+    parsed_lines = (struct parsed_line*)malloc(line_counter * sizeof(struct parsed_line));
+    counter_loop_exit = 0;
+    line_counter = 0;
+    FILE* file_ptr_counter2 = fopen(trace_file_name, "r");
+    while(counter_loop_exit == 0){
+        if(EOF == fscanf(file_ptr_counter2, "%x %c", &virt_mem_addr, &read_or_write)){
+            counter_loop_exit=1;
+        }else{
+            parsed_lines[line_counter].vpn = (virt_mem_addr >> page_frame_size);
+            // parsed_lines[line_counter].read = (read_or_write=='R');
+            line_counter++;
+        }
+    }
+    fclose(file_ptr_counter2);
     FILE* file_ptr = fopen(trace_file_name, "r");
     if(file_ptr==NULL){
         printf("File not found, exiting.. \n");
@@ -189,9 +248,6 @@ int main(int argc, char** argv)
         frames[i].brought_in_at = -1;
         frames[i].last_used = -1;
     }
-    // read line and update these 3 parameters at each iteration
-    char read_or_write;
-    unsigned virt_mem_addr;
     int loop_exit = 0;
     // meme accesses counts the number of lines basically
     int mem_accesses = 0;
@@ -241,7 +297,7 @@ int main(int argc, char** argv)
                     // find index of frame to evict according to whatever strategy is being used
                     int evict_idx = -1;
                     if(strcmp(strategy,OPT)==0){
-                        evict_idx = execute_opt(trace_file_name, num_frames, is_verbose);
+                        evict_idx = execute_opt(trace_file_name, num_frames, mem_accesses, total_accesses);
                     }else if(strcmp(strategy, FIFO)==0){
                         evict_idx = execute_fifo(num_frames);
                     }else if(strcmp(strategy, CLOCK)==0){
@@ -340,7 +396,7 @@ int main(int argc, char** argv)
                     // find index of frame to evict according to whatever strategy is being used
                     int evict_idx = -1;
                     if(strcmp(strategy,OPT)==0){
-                        evict_idx = execute_opt(trace_file_name, num_frames, is_verbose);
+                        evict_idx = execute_opt(trace_file_name, num_frames, mem_accesses, total_accesses);
                     }else if(strcmp(strategy, FIFO)==0){
                         evict_idx = execute_fifo(num_frames);
                     }else if(strcmp(strategy, CLOCK)==0){
@@ -407,5 +463,6 @@ int main(int argc, char** argv)
     }
     print_state(mem_accesses, misses, writes_to_disk, drops_non_dirty);
     // printf("Evictions %d \n", evictions);
+    fclose(file_ptr);
     return 0;
 }
