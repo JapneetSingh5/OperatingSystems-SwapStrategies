@@ -44,7 +44,7 @@ struct accessed_page {
 };
 
 void print_state(int num_mem_access, int misses, int writes, int drops){
-    printf("Number of memory accesses:%d\nNumber of misses:%d\nNumber of writes:%d\nNumber of drops:%d\n",num_mem_access,misses,writes,drops);
+    printf("Number of memory accesses: %d\nNumber of misses: %d\nNumber of writes: %d\nNumber of drops: %d\n",num_mem_access,misses,writes,drops);
 }
 
 void print_verbose_state(int read, int written, int was_dirty){
@@ -115,23 +115,6 @@ int execute_fifo(int num_frames){
 // how to update begin after evict inde return?
 // piazza doubt?
 int execute_clock(int num_frames){
-    if(debug==1) printf("Performing CLOCK.... \n");
-    int start_pointer = clock_pointer;
-    int evict_idx_temp = -1;
-    do {
-        if(frames[clock_pointer].use == 1) {
-            frames[clock_pointer].use = 0;
-            clock_pointer = (clock_pointer + 1) % num_frames;
-            continue;
-        }
-        evict_idx_temp = clock_pointer;
-        clock_pointer = (clock_pointer + 1) % num_frames;
-        return evict_idx_temp % num_frames;
-    } while (start_pointer != clock_pointer);
-
-    evict_idx_temp = clock_pointer;
-    clock_pointer = (clock_pointer + 1) % num_frames;
-    return (evict_idx_temp)%num_frames;
 // How does the OS employ the use bit to approximate LRU? Well, there
 // could be a lot of ways, but with the clock algorithm, one simple
 // approach was suggested. Imagine all the pages of the system arranged in
@@ -144,6 +127,26 @@ int execute_clock(int num_frames){
 // until it finds a use bit that is set to 0, implying this page has not been
 // recently used (or, in the worst case, that all pages have been and that we
 // have now searched through the entire set of pages, clearing all the bits).
+    if(debug==1) printf("Performing CLOCK.... \n");
+    int start_pointer = clock_pointer;
+    int evict_idx_temp = -1;
+    if(frames[clock_pointer].use == 1) {
+            frames[clock_pointer].use = 0;
+            clock_pointer = (clock_pointer + 1) % num_frames;
+    }
+    while(start_pointer != clock_pointer){
+        if(frames[clock_pointer].use == 1) {
+            frames[clock_pointer].use = 0;
+            clock_pointer = (clock_pointer + 1) % num_frames;
+            continue;
+        }
+        evict_idx_temp = clock_pointer;
+        clock_pointer = (clock_pointer + 1) % num_frames;
+        return evict_idx_temp % num_frames;
+    } 
+    evict_idx_temp = clock_pointer;
+    clock_pointer = (clock_pointer + 1) % num_frames;
+    return (evict_idx_temp)%num_frames;
 }
 
 int execute_lru(int num_frames){
